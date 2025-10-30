@@ -20,6 +20,7 @@ import {
 } from '@/components/ui/carousel';
 
 export default function HomePage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [formData, setFormData] = useState({
     fullName: '',
     phoneNumber: '',
@@ -194,7 +195,9 @@ export default function HomePage() {
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
-            <div className="flex items-center space-x-4">
+
+            {/* Desktop Buttons */}
+            <div className="hidden md:flex items-center space-x-4">
               <Button variant="ghost" className="text-gray-700 hover:text-gray-900 font-medium">
                 Sign In
               </Button>
@@ -204,24 +207,69 @@ export default function HomePage() {
                 </Button>
               </Link>
             </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden text-gray-700 hover:text-[#67BC2A]"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={mobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+              </svg>
+            </button>
           </div>
+
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden border-t border-gray-200 bg-white">
+              <div className="px-4 py-6 space-y-4">
+                <div className="space-y-2">
+                  <button className="block w-full text-left px-3 py-2 text-gray-700 hover:text-[#67BC2A] hover:bg-green-50 rounded-md">
+                    Platform
+                  </button>
+                  <button className="block w-full text-left px-3 py-2 text-gray-700 hover:text-[#67BC2A] hover:bg-green-50 rounded-md">
+                    Who We Serve
+                  </button>
+                  <button className="block w-full text-left px-3 py-2 text-gray-700 hover:text-[#67BC2A] hover:bg-green-50 rounded-md">
+                    Pricing
+                  </button>
+                  <button className="block w-full text-left px-3 py-2 text-gray-700 hover:text-[#67BC2A] hover:bg-green-50 rounded-md">
+                    Resources
+                  </button>
+                  <button className="block w-full text-left px-3 py-2 text-gray-700 hover:text-[#67BC2A] hover:bg-green-50 rounded-md">
+                    WellnessZ
+                  </button>
+                </div>
+                <div className="pt-4 border-t border-gray-200 space-y-2">
+                  <Button variant="ghost" className="w-full justify-start text-gray-700 hover:text-gray-900">
+                    Sign In
+                  </Button>
+                  <Link href="/signup" className="block">
+                    <Button className="w-full bg-[#67BC2A] hover:bg-[#5aaa24] text-white">
+                      Start for Free
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </header>
 
       {/* Hero Section with Form */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
+      <section className="py-8 md:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             <div>
-              <h1 className="text-5xl sm:text-6xl font-bold text-gray-900 leading-tight mb-8">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6 md:mb-8">
                 Transform Your Coaching Business with WellnessZ
               </h1>
-              <p className="text-xl text-gray-700 mb-8 leading-relaxed">
+              <p className="text-lg md:text-xl text-gray-700 mb-6 md:mb-8 leading-relaxed">
                 Stop juggling spreadsheets, WhatsApp chats, and endless manual work. WellnessZ gives you one powerful app to manage clients, deliver programs, and grow your income — all in one place.
               </p>
 
 
-              <div className="space-y-6 max-w-lg">
+              <div className="space-y-4 md:space-y-6 max-w-lg">
                 <div>
                   <label className="block text-sm font-medium text-[#67BC2A] mb-2">
                     Full Name<span className="text-red-500">*</span>
@@ -232,7 +280,7 @@ export default function HomePage() {
                     value={formData.fullName}
                     onChange={handleChange}
                     placeholder="Enter your full name"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#67BC2A] focus:border-transparent outline-none"
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#67BC2A] focus:border-transparent outline-none text-sm md:text-base"
                   />
                 </div>
 
@@ -246,7 +294,7 @@ export default function HomePage() {
                     value={formData.phoneNumber}
                     onChange={handleChange}
                     placeholder="+91 98765 43210"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#67BC2A] focus:border-transparent outline-none"
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#67BC2A] focus:border-transparent outline-none text-sm md:text-base"
                   />
                 </div>
 
@@ -260,81 +308,123 @@ export default function HomePage() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="your@email.com"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#67BC2A] focus:border-transparent outline-none"
+                    className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#67BC2A] focus:border-transparent outline-none text-sm md:text-base"
                   />
                 </div>
 
                 <Link href="/signup" className="w-full">
                   <Button
                     size="lg"
-                    className="w-full bg-[#67BC2A] hover:bg-[#5aaa24] text-white py-4 h-auto rounded-lg font-semibold text-lg shadow-lg"
+                    className="w-full bg-[#67BC2A] hover:bg-[#5aaa24] text-white py-3 md:py-4 h-auto rounded-lg font-semibold text-base md:text-lg shadow-lg"
                   >
                     Start Your 14-Day Free Trial
                   </Button>
                 </Link>
-                <p className="text-center text-sm text-gray-600 mt-3">
+                <p className="text-center text-xs md:text-sm text-gray-600 mt-3">
                   No credit card required • Cancel anytime • Join 3,000+ coaches
                 </p>
               </div>
             </div>
 
-            <div className="hidden lg:block space-y-6">
-              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-8 relative">
+            <div className="lg:block space-y-6 mt-8 lg:mt-0">
+              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-4 md:p-8 relative">
                 <div className="aspect-video bg-gray-900 rounded-xl relative overflow-hidden">
                   {/* Video Placeholder */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-center text-white">
-                      <div className="w-20 h-20 bg-[#67BC2A] rounded-full flex items-center justify-center mx-auto mb-4 cursor-pointer hover:bg-[#5aaa24] transition-colors">
-                        <svg className="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                      <div className="w-16 h-16 md:w-20 md:h-20 bg-[#67BC2A] rounded-full flex items-center justify-center mx-auto mb-4 cursor-pointer hover:bg-[#5aaa24] transition-colors">
+                        <svg className="w-6 h-6 md:w-8 md:h-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M8 5v14l11-7z" />
                         </svg>
                       </div>
-                      <p className="text-lg font-semibold">Watch the Demo Video</p>
-                      <p className="text-sm opacity-80">See how WellnessZ transforms coaching businesses</p>
+                      <p className="text-base md:text-lg font-semibold">Watch the Demo Video</p>
+                      <p className="text-xs md:text-sm opacity-80">See how WellnessZ transforms coaching businesses</p>
                     </div>
                   </div>
                   {/* Background Image */}
                 </div>
                 <div className="text-center mt-4">
-                  <p className="text-gray-600 font-medium">Transform Your Business Today</p>
+                  <p className="text-gray-600 font-medium text-sm md:text-base">Transform Your Business Today</p>
                 </div>
               </div>
 
               {/* Green Box Below Video */}
-              <div className="bg-gradient-to-r from-[#67BC2A]/10 to-green-100 rounded-xl p-6 mb-8">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">🎯 What You'll Discover in This Video:</h3>
-                <ul className="space-y-2 text-gray-700">
+              <div className="bg-gradient-to-r from-[#67BC2A]/10 to-green-100 rounded-xl p-4 md:p-6 mb-8">
+                <h3 className="text-base md:text-lg font-semibold text-gray-900 mb-4">🎯 What You'll Discover in This Video:</h3>
+                <ul className="space-y-2 text-gray-700 text-sm md:text-base">
                   <li>• How 3,000+ coaches run their entire business using WellnessZ</li>
                   <li>• The secret to automating client tracking, payments & follow-ups</li>
                   <li>• How to get your own branded app starting at just ₹3,000/month</li>
                 </ul>
-                <p className="text-[#67BC2A] font-semibold mt-4">🔥 Join the movement that's transforming the wellness industry.</p>
+                <p className="text-[#67BC2A] font-semibold mt-4 text-sm md:text-base">🔥 Join the movement that's transforming the wellness industry.</p>
               </div>
 
             </div>
           </div>
         </div>
       </section>
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-teal-50 via-cyan-50 to-blue-50">
+
+      {/* Mobile Features Section */}
+      <section className="lg:hidden py-12 px-4 bg-white">
+        <div className="max-w-md mx-auto text-center">
+          <h3 className="text-xl font-bold text-gray-900 mb-6">Why Choose WellnessZ?</h3>
+          <div className="space-y-4">
+            <div className="flex items-center space-x-3 text-left">
+              <div className="w-8 h-8 bg-[#67BC2A] rounded-full flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <span className="text-gray-700 text-sm">Manage 100+ clients effortlessly</span>
+            </div>
+            <div className="flex items-center space-x-3 text-left">
+              <div className="w-8 h-8 bg-[#67BC2A] rounded-full flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <span className="text-gray-700 text-sm">Automate payments & follow-ups</span>
+            </div>
+            <div className="flex items-center space-x-3 text-left">
+              <div className="w-8 h-8 bg-[#67BC2A] rounded-full flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <span className="text-gray-700 text-sm">Get your branded app from ₹3,000/month</span>
+            </div>
+            <div className="flex items-center space-x-3 text-left">
+              <div className="w-8 h-8 bg-[#67BC2A] rounded-full flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <span className="text-gray-700 text-sm">Save 20+ hours per week on admin tasks</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-12 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-teal-50 via-cyan-50 to-blue-50">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl sm:text-5xl font-bold text-center text-gray-900 mb-20">
-            The next generation of<br />wellness coaching is built on WellnessZ.
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center text-gray-900 mb-12 md:mb-20">
+            The next generation of<br className="hidden sm:block" />wellness coaching is built on WellnessZ.
           </h2>
 
           <Carousel className="w-full max-w-5xl mx-auto">
             <CarouselContent>
               {/* Slide 1 - Success Stories Paragraph */}
               <CarouselItem>
-                <div className="bg-white rounded-2xl p-12 shadow-lg text-center">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-8">Real Success Stories from Our Community</h3>
-                  <div className="space-y-6 text-gray-700 leading-relaxed">
-                    <p className="text-lg">
+                <div className="bg-white rounded-2xl p-6 md:p-12 shadow-lg text-center">
+                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-6 md:mb-8">Real Success Stories from Our Community</h3>
+                  <div className="space-y-4 md:space-y-6 text-gray-700 leading-relaxed">
+                    <p className="text-sm md:text-lg">
                       <strong className="text-[#67BC2A]">Mike Rosenbluth, CEO of Swing Therapeutics,</strong> shares how "Working with WellnessZ has allowed expansion of access to expert fibromyalgia treatment through the Swing Care clinic, helping to better serve patients, integrate with backend systems more quickly, and monitor patient outcomes while keeping their data secure."
                     </p>
-                    <p className="text-lg">
+                    <p className="text-sm md:text-lg">
                       Meanwhile, <strong className="text-[#67BC2A]">Rajesh Kumar from FitLife Studio in Delhi</strong> experienced incredible growth: "Before WellnessZ, managing 200+ clients was a nightmare. Now everything is automated - from meal plans to progress tracking. Our team productivity increased by 300% and client satisfaction scores hit 98%!"
                     </p>
-                    <p className="text-lg">
+                    <p className="text-sm md:text-lg">
                       <strong className="text-[#67BC2A]">Priya Sharma, a Nutrition Coach from Mumbai,</strong> transformed her entire business model: "WellnessZ completely transformed my coaching business. I went from spending 4 hours daily on admin work to just 30 minutes. My client retention increased by 60% and I doubled my revenue in 6 months!"
                     </p>
                   </div>

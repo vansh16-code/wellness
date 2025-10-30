@@ -20,6 +20,7 @@ import {
 } from '@/components/ui/navigation-menu';
 
 export default function SignUpPage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [formData, setFormData] = useState({
     fullName: '',
     phoneNumber: '',
@@ -49,7 +50,7 @@ export default function SignUpPage() {
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center">
               <Image
-                src="/well.jpg"
+                src="/welll.jpg"
                 alt="WellnessZ"
                 width={120}
                 height={60}
@@ -112,20 +113,78 @@ export default function SignUpPage() {
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
-            <div className="flex items-center space-x-4">
+
+            {/* Desktop Buttons */}
+            <div className="hidden md:flex items-center space-x-4">
               <Link href="/">
                 <Button variant="ghost" className="text-gray-700 hover:text-[#67BC2A] font-medium">
                   Back to Home
                 </Button>
               </Link>
             </div>
+
+            {/* Mobile Menu Button */}
+            <button 
+              className="md:hidden text-gray-700 hover:text-[#67BC2A]"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={mobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+              </svg>
+            </button>
           </div>
+
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden border-t border-gray-200 bg-white">
+              <div className="px-4 py-6 space-y-4">
+                <div className="space-y-2">
+                  <button className="block w-full text-left px-3 py-2 text-gray-700 hover:text-[#67BC2A] hover:bg-green-50 rounded-md">
+                    Platform
+                  </button>
+                  <button className="block w-full text-left px-3 py-2 text-gray-700 hover:text-[#67BC2A] hover:bg-green-50 rounded-md">
+                    Pricing
+                  </button>
+                  <Link href="/" className="block w-full text-left px-3 py-2 text-gray-700 hover:text-[#67BC2A] hover:bg-green-50 rounded-md">
+                    Home
+                  </Link>
+                </div>
+                <div className="pt-4 border-t border-gray-200">
+                  <Link href="/" className="block">
+                    <Button variant="ghost" className="w-full justify-start text-gray-700 hover:text-[#67BC2A]">
+                      Back to Home
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </header>
 
-      <div className="bg-gray-50 flex">
+      {/* Mobile Testimonial Section */}
+      <div className="lg:hidden bg-gradient-to-r from-[#67BC2A]/10 to-green-100 px-4 py-8">
+        <div className="max-w-md mx-auto text-center">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Join 3,000+ Active Coaches</h3>
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <p className="text-gray-700 italic text-sm mb-2">
+              "WellnessZ transformed my coaching business completely. I can now manage 100+ clients effortlessly."
+            </p>
+            <div className="flex justify-center text-yellow-400 mb-2">
+              {[...Array(5)].map((_, i) => (
+                <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              ))}
+            </div>
+            <p className="text-xs font-semibold text-gray-900">Priya S.</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-gray-50 flex min-h-screen">
         {/* Left Side - Branding and Features */}
-        <div className="hidden lg:flex lg:w-1/2 bg-white p-12 flex-col justify-center">
+        <div className="hidden lg:flex lg:w-1/2 bg-white p-8 xl:p-12 flex-col justify-center">
           <div className="max-w-md">
 
             {/* Headline */}
@@ -230,14 +289,14 @@ export default function SignUpPage() {
         </div>
 
         {/* Right Side - Sign Up Form */}
-        <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
+        <div className="w-full lg:w-1/2 flex items-center justify-center p-4 sm:p-6 md:p-8">
           <div className="max-w-md w-full">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">14-Day Free Trial</h2>
-              <p className="text-gray-600">No credit card required</p>
+            <div className="text-center mb-6 md:mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">14-Day Free Trial</h2>
+              <p className="text-gray-600 text-sm md:text-base">No credit card required</p>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
               {/* Full Name */}
               <div>
                 <label className="block text-sm font-medium text-[#67BC2A] mb-2">
@@ -250,7 +309,7 @@ export default function SignUpPage() {
                   onChange={handleChange}
                   placeholder="Enter your full name"
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#67BC2A] focus:border-transparent outline-none"
+                  className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#67BC2A] focus:border-transparent outline-none text-sm md:text-base"
                 />
               </div>
 
@@ -266,7 +325,7 @@ export default function SignUpPage() {
                   onChange={handleChange}
                   placeholder="+91 98765 43210"
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#67BC2A] focus:border-transparent outline-none"
+                  className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#67BC2A] focus:border-transparent outline-none text-sm md:text-base"
                 />
               </div>
 
@@ -282,27 +341,27 @@ export default function SignUpPage() {
                   onChange={handleChange}
                   placeholder="your@email.com"
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#67BC2A] focus:border-transparent outline-none"
+                  className="w-full px-3 md:px-4 py-2 md:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#67BC2A] focus:border-transparent outline-none text-sm md:text-base"
                 />
               </div>
 
               {/* Submit Button */}
               <Button
                 type="submit"
-                className="w-full bg-[#67BC2A] hover:bg-[#5aaa24] text-white py-4 h-auto text-lg font-semibold"
+                className="w-full bg-[#67BC2A] hover:bg-[#5aaa24] text-white py-3 md:py-4 h-auto text-base md:text-lg font-semibold"
               >
                 Start Your 14-Day Free Trial
               </Button>
 
               {/* Terms */}
-              <p className="text-xs text-gray-500 text-center">
+              <p className="text-xs md:text-sm text-gray-500 text-center">
                 No credit card required • Cancel anytime • Join 3,000+ coaches
               </p>
             </form>
 
             {/* Sign In Link */}
-            <div className="mt-8 text-center">
-              <p className="text-gray-600">
+            <div className="mt-6 md:mt-8 text-center">
+              <p className="text-gray-600 text-sm md:text-base">
                 Already have an account?{' '}
                 <a href="#" className="text-[#67BC2A] hover:underline font-medium">
                   Sign in
