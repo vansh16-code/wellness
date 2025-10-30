@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -197,9 +198,11 @@ export default function HomePage() {
               <Button variant="ghost" className="text-gray-700 hover:text-gray-900 font-medium">
                 Sign In
               </Button>
-              <Button className="bg-[#67BC2A] hover:bg-[#5aaa24] text-white rounded-full font-medium">
-                Start for Free
-              </Button>
+              <Link href="/signup">
+                <Button className="bg-[#67BC2A] hover:bg-[#5aaa24] text-white rounded-full font-medium">
+                  Start for Free
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -261,13 +264,14 @@ export default function HomePage() {
                   />
                 </div>
 
-                <Button
-                  onClick={handleSubmit}
-                  size="lg"
-                  className="w-full bg-[#67BC2A] hover:bg-[#5aaa24] text-white py-4 h-auto rounded-lg font-semibold text-lg shadow-lg"
-                >
-                  Start Your 14-Day Free Trial
-                </Button>
+                <Link href="/signup" className="w-full">
+                  <Button
+                    size="lg"
+                    className="w-full bg-[#67BC2A] hover:bg-[#5aaa24] text-white py-4 h-auto rounded-lg font-semibold text-lg shadow-lg"
+                  >
+                    Start Your 14-Day Free Trial
+                  </Button>
+                </Link>
                 <p className="text-center text-sm text-gray-600 mt-3">
                   No credit card required • Cancel anytime • Join 3,000+ coaches
                 </p>
